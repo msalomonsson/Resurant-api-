@@ -5,10 +5,27 @@ class Ui{
     static cardHtml(recipeObj){
         const card = document.querySelector('.card')
         
-
-        var array = Object.entries(recipeObj)
-        console.log(array)
+        const array = Object.entries(recipeObj)
+        
+        const dataStructre = [];
+        for (let i = 0; i < array.length; i++) {
+            if(array[i][0].includes('strIngredient')){
+                if(array[i][1] != '' ){
+                    dataStructre.push(array[i])
+                }
+            }
+        }
        
+       const dataMesu = [];
+       for(let i = 0; i < array.length; i++){
+         if(array[i][0].includes('strMeasure')){
+            if(array[i][1] != ''){
+                dataMesu.push(array[i])
+            }
+        }
+       }
+
+          
         card.innerHTML = `
         <h5 class="card-header text-center">${recipeObj.strMeal}</h5>
           <div class="card-body d-flex flex-column text-center ">
@@ -28,23 +45,22 @@ class Ui{
             </div>
             <div class="ingredients pl-4" >
                 <h5>Ingredients</h5>
-                <ul>
-                    <li>${recipeObj.strIngredient1} ${recipeObj.strMeasure1}</li>
-                    <li>${recipeObj.strIngredient2} ${recipeObj.strMeasure2}</li>
-                    <li>${recipeObj.strIngredient3} ${recipeObj.strMeasure3}</li>
-                    <li>${recipeObj.strIngredient4} ${recipeObj.strMeasure4}</li>
-                    <li>${recipeObj.strIngredient5} ${recipeObj.strMeasure5}</li>
-                    <li>${recipeObj.strIngredient6} ${recipeObj.strMeasure6}</li>
-                    <li>${recipeObj.strIngredient7} ${recipeObj.strMeasure7}</li>
-                    <li>${recipeObj.strIngredient8} ${recipeObj.strMeasure8}</li>
-                    <li>${recipeObj.strIngredient9} ${recipeObj.strMeasure9}</li>
-                    <li>${recipeObj.strIngredient10} ${recipeObj.strMeasure10}</li>
-        
+                <ul class="list">
+                    <li>${dataStructre[2][1]}</li>
                 </ul>
             </div>  
           </div>
-        `
+        `;
+
+        for(let i = 0; i < dataStructre.length; i++){
+            const list = document.querySelector('.list')
+            list.innerHTML += `<li>${dataStructre[i][1]}: ${dataMesu[i][1]}</li>`
+            
+        }
+
     }
+    
+  
 
     static clearInput(){
         const input = document.querySelector('.input')
@@ -60,3 +76,4 @@ class Ui{
 
 
 export default Ui
+

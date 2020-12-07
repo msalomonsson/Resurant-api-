@@ -11,7 +11,7 @@ import Recipes from './recipe.js';
         e.preventDefault()
 
         const inputValue = document.querySelector('.input').value;
-    
+        
         const recipe = Recipes.getRecipe(inputValue);
         recipe.then(data => {
             const recipeObj = data.meals[0];
@@ -25,8 +25,6 @@ import Recipes from './recipe.js';
             alert('Something went wrong')
             Ui.clearInput()
         })
-    
-    
     }
     
 }())
